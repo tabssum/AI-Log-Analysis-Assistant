@@ -1,0 +1,10 @@
+2026-04-15T14:30:00Z INFO image-worker started queue=demo-images
+2026-04-15T14:30:01Z INFO processing file=demo-image-42.png
+2026-04-15T14:30:02Z WARN temporary storage usage percent=91 threshold=85
+2026-04-15T14:30:03Z ERROR unable to write thumbnail error=NoSpaceLeftOnDevice
+2026-04-15T14:30:04Z ERROR thumbnail generation failed file=demo-image-42.png
+2026-04-15T14:30:05Z CRITICAL worker paused reason=storage_capacity_exceeded
+2026-04-15T14:30:09Z INFO cleanup started target=temporary-cache
+2026-04-15T14:30:12Z INFO cleanup completed freed_mb=512
+2026-04-15T14:30:13Z INFO storage usage recovered percent=63
+2026-04-15T14:30:14Z INFO worker resumed queue=demo-images

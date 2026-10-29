@@ -10,7 +10,7 @@ from embeddings import (
 )
 
 
-DEFAULT_COLLECTION_NAME = "log_chunks_ollama_nomic_embed_text"
+DEFAULT_COLLECTION_NAME = "log_chunks_gemini_embedding_2"
 
 
 @dataclass(frozen=True)
@@ -21,7 +21,7 @@ class VectorSearchResult:
 
 
 class ChromaVectorStore:
-    """Persist and search log-chunk embeddings in a local ChromaDB collection."""
+    """Persist and search Gemini log embeddings in a ChromaDB collection."""
 
     def __init__(
         self,

@@ -1,0 +1,11 @@
+2026-04-15T13:05:00Z INFO payment-api starting dependency=inventory-service
+2026-04-15T13:05:02Z INFO health check passed dependency=inventory-service
+2026-04-15T13:07:14Z WARN dependency response time elevated duration_ms=1800
+2026-04-15T13:07:17Z ERROR upstream request failed status=503 request_id=demo-7781
+2026-04-15T13:07:18Z WARN retry scheduled attempt=1 delay_ms=200
+2026-04-15T13:07:19Z ERROR upstream request failed status=503 request_id=demo-7781
+2026-04-15T13:07:20Z WARN retry scheduled attempt=2 delay_ms=500
+2026-04-15T13:07:22Z CRITICAL payment request abandoned reason=retry_limit request_id=demo-7781
+2026-04-15T13:07:25Z INFO circuit breaker opened dependency=inventory-service
+2026-04-15T13:08:00Z INFO circuit breaker half-open dependency=inventory-service
+2026-04-15T13:08:01Z INFO health check passed dependency=inventory-service

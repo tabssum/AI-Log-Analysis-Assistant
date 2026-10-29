@@ -1,0 +1,12 @@
+2026-04-15T10:22:01Z INFO report-worker started job_id=demo-2207
+2026-04-15T10:22:02Z INFO input file validated rows=3
+2026-04-15T10:22:03Z INFO transformation started stage=normalize
+2026-04-15T10:22:04Z INFO transformation completed stage=normalize rows=3
+2026-04-15T10:22:05Z INFO transformation started stage=enrich
+2026-04-15T10:22:06Z WARN upstream response missing optional field=region row=2
+2026-04-15T10:22:07Z ERROR report generation failed job_id=demo-2207 row=2
+2026-04-15T10:22:07Z ERROR KeyError: required field 'customer_id' missing from row 2
+2026-04-15T10:22:08Z CRITICAL worker exiting after unhandled exception job_id=demo-2207
+2026-04-15T10:22:09Z INFO job marked failed job_id=demo-2207
+2026-04-15T10:22:15Z INFO worker restarted attempt=1
+2026-04-15T10:22:16Z INFO health check passed worker=report-worker

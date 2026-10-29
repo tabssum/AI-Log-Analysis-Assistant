@@ -7,10 +7,10 @@ import pandas as pd
 import streamlit as st
 
 from chunker import create_event_chunks
-from embeddings import OllamaEmbeddingError
+from embeddings import GeminiEmbeddingError
 from llm import (
-    DEFAULT_OLLAMA_MODEL,
-    OllamaError,
+    DEFAULT_GEMINI_MODEL,
+    GeminiError,
     RetrievedEvidence,
     generate_log_analysis,
 )
@@ -542,14 +542,14 @@ def load_cached_parsed_data():
         except Exception:
             pass
 
-    # Fallback to local Spark_2k.log if available for direct testing
-    sample_file = Path(__file__).parent / "Spark_2k.log"
+    # Fallback to the bundled error sample if no parsed data has been cached.
+    sample_file = Path(__file__).parent / "sample_error.log"
     if sample_file.exists():
         try:
             content = sample_file.read_text(encoding="utf-8", errors="replace")
             parsed = parse_log_lines(content)
             return {
-                "filename": "Spark_2k.log",
+                "filename": sample_file.name,
                 "size_bytes": sample_file.stat().st_size,
                 "records": [entry.to_dict() for entry in parsed],
             }
@@ -726,7 +726,7 @@ def render_main_view():
             "Application Crash (sample_application.log)",
             "Authentication Incident (sample_authentication.log)",
             "Network Failure (sample_network.log)",
-            "Spark Cluster (Spark_2k.log)",
+            "General Errors (sample_error.log)",
         ]
         chosen_sample = st.selectbox(
             "Quick Demo Logs:",
@@ -749,7 +749,7 @@ def render_main_view():
             "Application Crash (sample_application.log)": "sample_application.log",
             "Authentication Incident (sample_authentication.log)": "sample_authentication.log",
             "Network Failure (sample_network.log)": "sample_network.log",
-            "Spark Cluster (Spark_2k.log)": "Spark_2k.log",
+            "General Errors (sample_error.log)": "sample_error.log",
         }
         target_file = Path(__file__).parent / sample_map[chosen_sample]
         if target_file.exists():
@@ -852,9 +852,9 @@ def render_main_view():
                         source=filename,
                         source_id=upload_fingerprint,
                     )
-            except OllamaEmbeddingError as error:
+            except GeminiEmbeddingError as error:
                 status.update(
-                    label="Could not prepare Ollama embeddings for this log.",
+                    label="Could not prepare Gemini embeddings for this log.",
                     state="error",
                 )
                 st.error(str(error))
@@ -896,7 +896,7 @@ def render_main_view():
             <div style="margin-bottom: 12px;">
                 <div style="font-size: 17px; font-weight: 700; color: #ffffff;">Ask AI About Log Failures</div>
                 <div style="font-size: 13.5px; color: #94a3b8;">
-                    Powered by local embeddings and Ollama ({DEFAULT_OLLAMA_MODEL}). Answers cite retrieved log evidence.
+                    Powered by Gemini embeddings and {DEFAULT_GEMINI_MODEL}. Answers cite retrieved log evidence.
                 </div>
             </div>
             """,
@@ -938,8 +938,8 @@ def render_main_view():
                 )
             with form_col2:
                     st.caption(
-                        "Start Ollama locally and install the `nomic-embed-text` "
-                        "embedding model and the `llama3.2` chat model."
+                        "Set `GOOGLE_API_KEY` in your environment or Streamlit "
+                        "secrets to enable Gemini."
                     )
 
         # Execute Search & Generation if submitted or preset clicked
@@ -960,7 +960,7 @@ def render_main_view():
                             n_results=5,
                             source_id=upload_fingerprint,
                         )
-                    except OllamaEmbeddingError as error:
+                    except GeminiEmbeddingError as error:
                         st.error(str(error))
                         search_results = None
 
@@ -982,9 +982,9 @@ def render_main_view():
                                 answer = generate_log_analysis(
                                     active_query,
                                     evidence,
-                                    model_name=DEFAULT_OLLAMA_MODEL,
+                                    model_name=DEFAULT_GEMINI_MODEL,
                                 )
-                            except OllamaError as error:
+                            except GeminiError as error:
                                 st.error(str(error))
                             else:
                                 st.session_state["semantic_search_answer"] = answer

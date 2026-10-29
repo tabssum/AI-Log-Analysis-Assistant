@@ -1,0 +1,12 @@
+2026-04-15T09:14:02Z INFO orders-api starting version=2.4.1
+2026-04-15T09:14:03Z INFO database connection pool configured max_size=10
+2026-04-15T09:14:05Z INFO database health check passed host=db-demo.internal
+2026-04-15T09:16:10Z WARN database pool usage high active=9 idle=1 max=10
+2026-04-15T09:16:13Z ERROR database connection acquire timed out wait_ms=500 active=10 idle=0
+2026-04-15T09:16:14Z ERROR order request failed request_id=demo-1042 route=/orders
+2026-04-15T09:16:16Z WARN database query latency elevated duration_ms=2400 threshold_ms=1000
+2026-04-15T09:16:18Z CRITICAL readiness probe failed reason=database_pool_exhausted
+2026-04-15T09:16:21Z INFO database connection returned active=9 idle=1
+2026-04-15T09:16:23Z WARN order request retry scheduled attempt=2 request_id=demo-1042
+2026-04-15T09:16:26Z INFO database health check passed duration_ms=42
+2026-04-15T09:16:30Z INFO orders-api accepting requests

@@ -1,0 +1,11 @@
+2026-04-15T11:40:00Z INFO auth-service started environment=demo
+2026-04-15T11:40:01Z INFO token validation enabled issuer=login.example.test
+2026-04-15T11:42:10Z INFO login request received user_id=demo-user-17
+2026-04-15T11:42:11Z WARN token validation failed reason=expired user_id=demo-user-17
+2026-04-15T11:42:12Z ERROR refresh token rejected reason=revoked user_id=demo-user-17
+2026-04-15T11:42:12Z INFO new login challenge issued user_id=demo-user-17
+2026-04-15T11:42:19Z WARN login attempts elevated client_id=demo-client-4 count=8
+2026-04-15T11:42:20Z ERROR rate limit exceeded client_id=demo-client-4 retry_after_seconds=60
+2026-04-15T11:42:21Z CRITICAL authentication temporarily blocked client_id=demo-client-4
+2026-04-15T11:43:22Z INFO rate limit window reset client_id=demo-client-4
+2026-04-15T11:43:23Z INFO login succeeded user_id=demo-user-17
